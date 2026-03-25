@@ -15,7 +15,9 @@ public class Main {
 		do {
 			System.out.println("\n 1. Add Student");
 			System.out.println("\n 2. View Student");
-			System.out.println("\n 3. Exit");
+			System.out.println("\n 3. Update Student");
+			System.out.println("\n 4. Delete Student");
+			System.out.println("\n 5. Exit");
 			System.out.println("Enter choice: ");
 			choice = sc.nextInt();
 			
@@ -51,14 +53,63 @@ public class Main {
 				 }
 				 break;
 			case 3:
-				System.out.println("Exiting....");
-				break;
+				System.out.print("Enter ID to update: ");
+			    int updateId = sc.nextInt();
+
+			    boolean found = false;
+
+			    for(Student st : list) {
+			        if(st.id == updateId) {
+
+			            sc.nextLine(); // buffer
+
+			            System.out.print("Enter new name: ");
+			            st.name = sc.nextLine();
+
+			            System.out.print("Enter new marks: ");
+			            st.marks = sc.nextInt();
+
+			            System.out.println("Student updated!");
+			            found = true;
+			            break;
+			 
+			        }
+			    }
+
+			    if(!found) {
+			        System.out.println("Student not found!");
+			    }
+			    break;
+			    
+			case 4:
+			    System.out.print("Enter ID to delete: ");
+			    int deleteId = sc.nextInt();
+
+			    boolean removed = false;
+
+			    for(int i = 0; i < list.size(); i++) {
+			        if(list.get(i).id == deleteId) {
+			            list.remove(i);
+			            System.out.println("Student deleted!");
+			            removed = true;
+			            break;
+			        }
+			    }
+
+			    if(!removed) {
+			        System.out.println("Student not found!");
+			    }
+			    break;
+			    
+			case 5:
+			    System.out.println("Exiting...");
+			    break;
 				
 			default:
 				System.out.println("invalied choice!");
 		}
 		
-	}while(choice != 3);
+	}while(choice != 5);
 
-}
+	}
 }
