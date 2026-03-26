@@ -23,10 +23,16 @@ public class Main {
 			
 			switch(choice) {
 			case 1:
-				System.out.print("Enter ID: ");
-				int id = sc.nextInt();
-				
-				sc.nextLine();
+				int id = 0;
+				try{
+					System.out.print("Enter ID: ");
+					id = sc.nextInt();
+				} catch (Exception e) {
+					System.out.println("Invalid input! Enter number only");
+					sc.nextLine(); //clear buffer
+					break;
+				}
+				sc.nextLine(); //clear buffer
 				
 				System.out.print("Enter Name: ");
                 String name = sc.nextLine();
@@ -34,6 +40,23 @@ public class Main {
                 System.out.print("Enter Marks: ");
                 int marks = sc.nextInt();
                 
+                if(marks<0 || marks >100) {
+                	System.out.println("Invalid marks! Marks should be between 0 and 100.");
+                	break;
+                }
+                
+                //dublicate id 
+                boolean exists = false;
+                for(Student st: list) {
+                	if(st.id == id) {
+                		exists = true;
+                		break;
+                	}
+                }
+                
+                if(exists) {
+                	System.out.println("ID is already exists!");
+                }else {
                 Student s = new Student();
                 s.id = id;
                 s.name = name;
@@ -41,6 +64,7 @@ public class Main {
                 
                 list.add(s);
                 System.out.println("Student Added!");
+                }
                 break;
                 
 			case 2:
